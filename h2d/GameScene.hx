@@ -23,6 +23,8 @@ class GameScene extends h2d.Scene
         this.game = Game.instance;
         this.sceneFrom = from;
 
+        this.watches = new Array();
+
         this.elapsedTime = 0.;
     }
 
