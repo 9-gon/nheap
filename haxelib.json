@@ -2,9 +2,9 @@
     "name": "nheap",
     "url": "https://github.com/9-gon/nheap",
     "license": "MIT",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "contributors": ["9-gon"],
-    "releasenote": "Initial release",
+    "releasenote": "Added gamepad management to the Game class",
     "dependencies": {
         "heaps": ""
     }
