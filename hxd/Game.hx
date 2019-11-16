@@ -115,7 +115,7 @@ class Game extends hxd.App
     function padDisconnect (pad:Pad) :Void->Void return function ()
     {
         this.pads.splice(this.pads.indexOf(pad),1);
-        if (0==this.pads.length) this.pads.unshift(null);
+        if (0==this.pads.length) this.pads.push(null);
     }
 
     function padSort (a:Pad,b:Pad) :Int
