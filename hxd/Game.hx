@@ -4,9 +4,10 @@ import hxd.evt.EventListener;
 import h2d.GameScene;
 
 /**
- * The `Game` class extends the `hxd.App` in two major ways:
+ * The `Game` class extends the `hxd.App` in three major ways:
  *  1. It provides support for a global list of `IEventListeners` for reference by any `EventDispatcher`.
  *  2. It allows independent GameScenes to inherently take on more of the frame-to-frame game logic.
+ *  3. It keeps reference to all connected `Pad`s in one array, sorted by player index.
  */
 class Game extends hxd.App
 {
@@ -15,6 +16,8 @@ class Game extends hxd.App
     var listeners:Map<String,IEventListener>;
 
     var currentScene:GameScene;
+
+    var pads:Array<Pad>;
 
     public function new ()
     {
@@ -26,12 +29,15 @@ class Game extends hxd.App
     {
         super.init();
         this.listeners = new Map();
+
+        this.pads = [ null ];
     }
 
     override function update (dt:Float) :Void
     {
         super.update(dt);
 
+        Pad.wait(handlePad);
         this.currentScene.frame(dt);
     }
 
@@ -83,5 +89,39 @@ class Game extends hxd.App
             this.currentScene = scene;
             this.setScene(this.currentScene,dispose);
         }
+    }
+    /**
+     * If `index` is a valid index, returns the `Pad` at that given index. If not, returns null.
+     */
+
+    public function getPad (index:Int) :Null<Pad> return (0<index&&index<this.pads.length) ? this.pads[index] : null;
+
+    /**
+     * Returns all `Pad`s currently connected to the Game.
+     */
+    public function getPads () :Array<Pad> return this.pads;
+
+    function handlePad (pad:Pad) :Void
+    {
+        pad.onDisconnect = padDisconnect(pad);
+
+        if (1==this.pads.length&&null==this.pads[0]) this.pads = [];
+        this.pads.push(pad);
+
+        this.pads.sort(padSort);
+        trace(this.pads);
+    }
+
+    function padDisconnect (pad:Pad) :Void->Void return function ()
+    {
+        this.pads.splice(this.pads.indexOf(pad),1);
+        if (0==this.pads.length) this.pads.unshift(null);
+    }
+
+    function padSort (a:Pad,b:Pad) :Int
+    {
+        if (a.index>b.index) return 1;
+        else if (a.index<b.index) return -1;
+        return 0;
     }
 }
