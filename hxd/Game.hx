@@ -116,6 +116,7 @@ class Game extends hxd.App
     {
         this.pads.splice(this.pads.indexOf(pad),1);
         if (0==this.pads.length) this.pads.push(null);
+        trace(this.pads);
     }
 
     function padSort (a:Pad,b:Pad) :Int
