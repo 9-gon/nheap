@@ -1,5 +1,5 @@
 # nheap
-### version 0.0.1
+### version 0.1.0
 
 nheap is an extension library for the heaps.io framework  
 this is by no means an exhaustive list of features or a game engine in and of itself - it's designed simply as a collection of utilities that i personally use between projects  
