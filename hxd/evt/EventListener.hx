@@ -12,5 +12,5 @@ interface IEventListener
      * @param entity the `Entity`, if any, to apply changes to
      * @param event the kind of event to execute
      */
-    public function onNotify (entity:Null<Entity>,event:EnumValue) :Void;   
+    public function onNotify (entity:Null<Entity>,event:String) :Void;   
 }

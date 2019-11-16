@@ -38,7 +38,7 @@ class EventDispatcher
      * @param entity the relevant `Entity`
      * @param event the event to notify
      */
-    public function dispatch (entity:Entity,event:EnumValue) :Void
+    public function dispatch (entity:Entity,event:String) :Void
     {
         this.sortListeners();
         var kill:Array<EventListener> = new Array();
