@@ -1,0 +1,11 @@
+{
+    "name": "nheap",
+    "url": "https://github.com/9-gon/nheap",
+    "license": "MIT",
+    "version": "0.0.1",
+    "contributors": ["9-gon"],
+    "releasenote": "Initial release",
+    "dependencies": {
+        "heaps": ""
+    }
+}
