@@ -15,7 +15,7 @@ class Entity
     }
 
     public function addEventListener (listener:IEventListener,?priority:Int=0,?once:Bool=false) this.dispatcher.addListener(listener,priority,once);
-    public function dispatch (event:EnumValue) :Void this.dispatcher.dispatch(this,event);
+    public function dispatch (event:String) :Void this.dispatcher.dispatch(this,event);
 
     public function getDrawObject () :Object return this.drawObject;
 }
