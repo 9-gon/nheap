@@ -24,7 +24,7 @@ class Game extends hxd.App
     {
         super();
         instance = this;
-        loader = new hxd.res.NLoader(hxd.fs.EmbedFileSystem.create());
+        loader = new hxd.res.NLoader(hxd.fs.LocalFileSystem.create());
     }
 
     override function init () :Void
