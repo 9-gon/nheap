@@ -12,7 +12,6 @@ import h2d.GameScene;
 class Game extends hxd.App
 {
     public static var instance:Game;
-    public static var loader:hxd.res.NLoader;
 
     var listeners:Map<String,IEventListener>;
 
