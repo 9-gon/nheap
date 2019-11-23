@@ -19,7 +19,8 @@ class GameSceneLayer extends Object
         this.purge =
         [
             h2d.Text,
-            h2d.Graphics
+            h2d.Graphics,
+            h2d.Bitmap
         ];
 
         this.x = 0;
