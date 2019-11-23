@@ -42,7 +42,7 @@ class GameScene extends h2d.Scene
      */
     public function _render () :Void
     {
-        for (layer in 0...this.layerCount) cast(this.getLayer(layer),GameSceneLayer).performGarbageCollection();
+        for (layer in 0...this.layerCount) cast(this.getLayer(layer)[0],GameSceneLayer).performGarbageCollection();
     }
 
     /**
