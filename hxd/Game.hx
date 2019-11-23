@@ -12,6 +12,7 @@ import h2d.GameScene;
 class Game extends hxd.App
 {
     public static var instance:Game;
+    public static var loader:hxd.res.NLoader;
 
     var listeners:Map<String,IEventListener>;
 
@@ -23,6 +24,7 @@ class Game extends hxd.App
     {
         super();
         instance = this;
+        loader = new hxd.res.NLoader(hxd.fs.EmbedFileSystem.create());
     }
 
     override function init () :Void
