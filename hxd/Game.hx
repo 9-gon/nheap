@@ -143,6 +143,8 @@ class Game extends hxd.App
         return 0;
     }
 
+    public function getMousePosition () :{x:Int,y:Int} return {x:cast(Window.getInstance().mouseX*(this.windowSize.w/this.scaler.w),Int),y:cast(Window.getInstance().mouseY*(this.windowSize.h/this.scaler.h),Int)};
+
     /**
      * Sets size of the scene.
      */
