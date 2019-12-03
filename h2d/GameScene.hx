@@ -13,6 +13,8 @@ class GameScene extends h2d.Scene
     var game:Game;
     var sceneFrom:GameScene;
 
+    var layers:Map<String,GameSceneLayer>;
+
     var watches:Array<Stopwatch>;
     var elapsedTime:Float;
 
@@ -22,6 +24,8 @@ class GameScene extends h2d.Scene
 
         this.game = Game.instance;
         this.sceneFrom = from;
+
+        this.layers = [];
 
         this.watches = new Array();
 
@@ -66,7 +70,13 @@ class GameScene extends h2d.Scene
     /**
      * Adds a `GameSceneLayer` to the supplied index.
      */
-    public function addLayerAt (layer:GameSceneLayer,index:Int) :Void this.add(layer,index);
+    public function addLayerAt (name:String,index:Int) :Void
+    {
+        this.layers.set(name,new GameSceneLayer(index,this));
+        this.add(this.layers[name],index);
+    }
+
+    public function getSceneLayer (name:String) :GameSceneLayer return this.layers[name];
 
     /**
      * @return the total time, in seconds, that this GameScene has been active
