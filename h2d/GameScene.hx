@@ -82,8 +82,7 @@ class GameScene extends h2d.Scene
     @:generic
     public function addToLayer <T:Object> (obj:T,layerName:String) :T
     {
-        obj.parent = this.layers[layerName];
-        trace(this.layers[layerName].children);
+        this.layers[layerName].addChild(obj);
         return obj;
     }
 
