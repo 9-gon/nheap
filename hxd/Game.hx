@@ -39,6 +39,7 @@ class Game extends hxd.App
         super.update(dt);
 
         Pad.wait(handlePad);
+        
         this.currentScene.frame(dt);
     }
 
