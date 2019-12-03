@@ -57,7 +57,7 @@ class Game extends hxd.App
     /**
      * Adds a Map of key-value mappings to the global list of `IEventListener`s. If any key already exists in this list, the function amends `key` until it is unique.
      */
-    public function addListeners (listeners:Map<String,IEventListener>)
+    public function addListeners (listeners:Map<String,IEventListener>) :Void
     {
         for (key in listeners.keys()) this.addListener(key,listeners[key]);
     }
