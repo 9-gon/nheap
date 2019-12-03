@@ -15,7 +15,7 @@ class Entity
     }
 
     public function addEventListener (listener:IEventListener,?priority:Int=0,?once:Bool=false) this.dispatcher.addListener(listener,priority,once);
-    public function dispatch (event:String) :Void this.dispatcher.dispatch(this,event);
+    public function dispatch (event:String,?params:Dynamic) :Void this.dispatcher.dispatch(event,params);
 
     public function getDrawObject () :Object return this.drawObject;
 }

@@ -38,13 +38,13 @@ class EventDispatcher
      * @param entity the relevant `Entity`
      * @param event the event to notify
      */
-    public function dispatch (entity:Entity,event:String) :Void
+    public function dispatch (event:String,?params:Dynamic=null) :Void
     {
         this.sortListeners();
         var kill:Array<EventListener> = new Array();
         for (lis in this.listeners)
         {
-            lis.listener.onNotify(entity,event);
+            lis.listener.onNotify(event,params);
             if (lis.once) kill.unshift(lis);
         }
         for (k in kill) this.listeners.remove(k);
