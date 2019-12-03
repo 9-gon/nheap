@@ -1,5 +1,6 @@
 package hxd;
 
+import h3d.Vector;
 import h2d.Scene;
 import hxd.evt.EventListener;
 import h2d.GameScene;
@@ -15,6 +16,7 @@ class Game extends hxd.App
     public static var instance:Game;
 
     var scaler:{w:Int,h:Int,i:Bool,hA:ScaleModeAlign,vA:ScaleModeAlign};
+    var windowSize:{w:Int,h:Int};
 
     var listeners:Map<String,IEventListener>;
 
@@ -141,12 +143,15 @@ class Game extends hxd.App
     }
 
     /**
-     * Sets the size of the game in windowed mode.
+     * Sets size of the scene.
      */
-    public function setSceneSize (width:Int,height:Int,?intScale:Bool=true,?hAlign:ScaleModeAlign=ScaleModeAlign.Center,?vAlign:ScaleModeAlign=ScaleModeAlign.Center) 
-    {
-        this.scaler = {w:width,h:height,i:intScale,hA:hAlign,vA:vAlign};
-    }
+    public function setSceneSize (width:Int,height:Int,?intScale:Bool=true,?hAlign:ScaleModeAlign=ScaleModeAlign.Center,?vAlign:ScaleModeAlign=ScaleModeAlign.Center) this.scaler = {w:width,h:height,i:intScale,hA:hAlign,vA:vAlign};
+
+    /**
+     * Set size of the game window.
+     */
+    public function setWindowSize (width:Int,height:Int) :Void this.windowSize = {w:width,h:height};
+
     function resizeScene () this.currentScene.scaleMode = ScaleMode.LetterBox(this.scaler.w,this.scaler.h,this.scaler.i,this.scaler.hA,this.scaler.vA);
-    function onWindowResize () :Void Window.getInstance().resize(this.scaler.w,this.scaler.h);
+    function onWindowResize () :Void Window.getInstance().resize(this.windowSize.w,this.windowSize.h);
 }
