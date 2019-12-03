@@ -30,15 +30,16 @@ class Game extends hxd.App
         instance = this;
         hxd.Res.initLocal();
 
+        this.listeners = new Map();
+        this.pads = [ null ];
+
         Window.getInstance().addResizeEvent(onWindowResize);
     }
 
     override function init () :Void
     {
         super.init();
-        this.listeners = new Map();
-
-        this.pads = [ null ];
+        this.onWindowResize();
     }
 
     override function update (dt:Float) :Void
@@ -153,5 +154,5 @@ class Game extends hxd.App
     public function setWindowSize (width:Int,height:Int) :Void this.windowSize = {w:width,h:height};
 
     function resizeScene () this.currentScene.scaleMode = ScaleMode.LetterBox(this.scaler.w,this.scaler.h,this.scaler.i,this.scaler.hA,this.scaler.vA);
-    function onWindowResize () :Void Window.getInstance().resize(this.windowSize.w,this.windowSize.h);
+    function onWindowResize () :Void if (Window.getInstance().width!=this.windowSize.w&&Window.getInstance().height!=this.windowSize.h) Window.getInstance().resize(this.windowSize.w,this.windowSize.h);
 }
