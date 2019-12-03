@@ -1,5 +1,6 @@
 package hxd;
 
+import h2d.Scene;
 import hxd.evt.EventListener;
 import h2d.GameScene;
 
@@ -13,6 +14,8 @@ class Game extends hxd.App
 {
     public static var instance:Game;
 
+    var scaler:{w:Int,h:Int,i:Bool,hA:ScaleModeAlign,vA:ScaleModeAlign};
+
     var listeners:Map<String,IEventListener>;
 
     var currentScene:GameScene;
@@ -24,6 +27,8 @@ class Game extends hxd.App
         super();
         instance = this;
         hxd.Res.initLocal();
+
+        Window.getInstance().addResizeEvent(onWindowResize);
     }
 
     override function init () :Void
@@ -97,13 +102,14 @@ class Game extends hxd.App
         if (0!=Reflect.compare(this.currentScene,scene))
         {
             this.currentScene = scene;
+            this.resizeScene();
             this.setScene(this.currentScene,dispose);
         }
     }
+
     /**
      * If `index` is a valid index, returns the `Pad` at that given index. If not, returns null.
      */
-
     public function getPad (index:Int) :Null<Pad> return (0<index&&index<this.pads.length) ? this.pads[index] : null;
 
     /**
@@ -133,4 +139,14 @@ class Game extends hxd.App
         else if (a.index<b.index) return -1;
         return 0;
     }
+
+    /**
+     * Sets the size of the game in windowed mode.
+     */
+    public function setSceneSize (width:Int,height:Int,?intScale:Bool=true,?hAlign:ScaleModeAlign=ScaleModeAlign.Center,?vAlign:ScaleModeAlign=ScaleModeAlign.Center) 
+    {
+        this.scaler = {w:width,h:height,i:intScale,hA:hAlign,vA:vAlign};
+    }
+    function resizeScene () this.currentScene.scaleMode = ScaleMode.LetterBox(this.scaler.w,this.scaler.h,this.scaler.i,this.scaler.hA,this.scaler.vA);
+    function onWindowResize () :Void Window.getInstance().resize(this.scaler.w,this.scaler.h);
 }
