@@ -2,6 +2,7 @@ package h2d;
 
 import hxd.Stopwatch;
 import hxd.Game;
+import h2d.Object;
 
 /**
  * The `GameScene` extends the `h2d.Scene` class in two major ways:
@@ -77,6 +78,12 @@ class GameScene extends h2d.Scene
     }
 
     public function getSceneLayer (name:String) :GameSceneLayer return this.layers[name];
+
+    public function addToLayer (obj:Object,layerName:String) :Object
+    {
+        obj.parent = this.layers[layerName];
+        return obj;
+    }
 
     /**
      * @return the total time, in seconds, that this GameScene has been active
