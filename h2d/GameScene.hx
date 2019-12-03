@@ -79,6 +79,7 @@ class GameScene extends h2d.Scene
 
     public function getSceneLayer (name:String) :GameSceneLayer return this.layers[name];
 
+    @:generic
     public function addToLayer <T> (obj:T,layerName:String) :T
     {
         if (Reflect.field(obj,"parent"))
