@@ -156,7 +156,7 @@ class Game extends hxd.App
     public function setWindowSize (width:Int,height:Int) :Void
     {
         this.windowSize = {w:width,h:height};
-        this.onWindowResize();
+        Window.getInstance().resize(width,height);
     }
 
     function resizeScene () this.currentScene.scaleMode = ScaleMode.LetterBox(this.scaler.w,this.scaler.h,this.scaler.i,this.scaler.hA,this.scaler.vA);
