@@ -2,14 +2,14 @@ package hxd.evt;
 
 import hxd.evt.EventListener;
 
-typedef EventListener<T> = { listener:IEventListener<T>, once:Bool, priority:Int };
+typedef EventListener<Dynamic> = { listener:IEventListener<Dynamic>, once:Bool, priority:Int };
 
 /**
  * The base dispatcher class. Most `Entities` in nheap should, by default, contain their own EventDispatcher.
  */
 class EventDispatcher
 {
-    var listeners:Array<EventListener<T>>;
+    var listeners:Array<EventListener<Dynamic>>;
 
     public function new () listeners = new Array();
 
@@ -19,13 +19,13 @@ class EventDispatcher
      * @param priority the priority of the listener, with 0 being the most urgent
      * @param once whether or not the listener should only be notified once
      */
-    public function addListener (listener:IEventListener<T>,?priority:Int=0,?once:Bool=false) :Void this.listeners.push({ listener: listener, priority: priority, once: once });
+    public function addListener (listener:IEventListener<Dynamic>,?priority:Int=0,?once:Bool=false) :Void this.listeners.push({ listener: listener, priority: priority, once: once });
     
     /**
      * Removes the specified listener from the list.
      * @param listener the event listener to remove
      */
-    public function removeListener (listener:IEventListener<T>) :Void for (lis in this.listeners) { if (Reflect.compareMethods(lis.listener,listener)) this.listeners.remove(lis); return; }
+    public function removeListener (listener:IEventListener<Dynamic>) :Void for (lis in this.listeners) { if (Reflect.compareMethods(lis.listener,listener)) this.listeners.remove(lis); return; }
     
     /**
      * Clears all listeners from the list.
@@ -40,7 +40,7 @@ class EventDispatcher
     public function dispatch (event:String,?params:Dynamic=null) :Void
     {
         this.sortListeners();
-        var kill:Array<EventListener> = new Array();
+        var kill:Array<EventListener<Dynamic>> = new Array();
         for (lis in this.listeners)
         {
             lis.listener.onNotify(event,params);
@@ -52,7 +52,7 @@ class EventDispatcher
     function sortListeners () :Void
     {
         this.listeners.sort(
-            function (a:EventListener,b:EventListener) :Int
+            function (a:EventListener<Dynamic>,b:EventListener<Dynamic>) :Int
             {
                 if (a.priority>b.priority) return -1;
                 else if (a.priority<b.priority) return 1;

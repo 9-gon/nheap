@@ -14,7 +14,7 @@ class Entity
         this.drawObject = new Object();
     }
 
-    public function addEventListener (listener:IEventListener,?priority:Int=0,?once:Bool=false) this.dispatcher.addListener(listener,priority,once);
+    public function addEventListener (listener:IEventListener<Dynamic>,?priority:Int=0,?once:Bool=false) this.dispatcher.addListener(listener,priority,once);
 
     public function dispatch (event:String,?params:Dynamic) :Void this.dispatcher.dispatch(event,params);
 

@@ -18,7 +18,7 @@ class Game extends hxd.App
     var scaler:{w:Int,h:Int,i:Bool,hA:ScaleModeAlign,vA:ScaleModeAlign};
     var windowSize:{w:Int,h:Int};
 
-    var listeners:Map<String,IEventListener>;
+    var listeners:Map<String,IEventListener<Dynamic>>;
 
     var currentScene:GameScene;
 
@@ -55,7 +55,7 @@ class Game extends hxd.App
      * Adds a new key-value mapping to the global list of `IEventListener`s. If `key` already exists in this list, the function amends `key` until it is unique.
      * @return if key was amended, the amended key; else, null
      */
-    public function addListener (key:String,listener:IEventListener) :Null<String>
+    public function addListener (key:String,listener:IEventListener<Dynamic>) :Null<String>
     {
         var k = key;
         while (this.listeners.exists(k)) k += "_2";
@@ -66,7 +66,7 @@ class Game extends hxd.App
     /**
      * Adds a Map of key-value mappings to the global list of `IEventListener`s. If any key already exists in this list, the function amends `key` until it is unique.
      */
-    public function addListeners (listeners:Map<String,IEventListener>) :Void
+    public function addListeners (listeners:Map<String,IEventListener<Dynamic>>) :Void
     {
         for (key in listeners.keys()) this.addListener(key,listeners[key]);
     }
@@ -75,12 +75,12 @@ class Game extends hxd.App
      * Returns the appropriate `IEventListener` if `key` has a mapping.  
      * Returns `null` if there is no such value mapped to `key`.
      */
-    public function getListener (key:String) :IEventListener return (this.listeners.exists(key)) ? this.listeners.get(key) : null;
+    public function getListener (key:String) :IEventListener<Dynamic> return (this.listeners.exists(key)) ? this.listeners.get(key) : null;
 
     /**
      * Returns a reference to all `IEventListener`s.
      */
-    public function getListeners () :Map<String,IEventListener> return this.listeners;
+    public function getListeners () :Map<String,IEventListener<Dynamic>> return this.listeners;
 
     /**
      * Removes a listener for the global list of 'IEventListener`s.
