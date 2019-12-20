@@ -1,16 +1,15 @@
 package hxd.evt;
 
-import h2d.Entity;
 import hxd.evt.EventListener;
 
-typedef EventListener = { listener:IEventListener, once:Bool, priority:Int };
+typedef EventListener<T> = { listener:IEventListener<T>, once:Bool, priority:Int };
 
 /**
  * The base dispatcher class. Most `Entities` in nheap should, by default, contain their own EventDispatcher.
  */
 class EventDispatcher
 {
-    var listeners:Array<EventListener>;
+    var listeners:Array<EventListener<T>>;
 
     public function new () listeners = new Array();
 
@@ -20,13 +19,13 @@ class EventDispatcher
      * @param priority the priority of the listener, with 0 being the most urgent
      * @param once whether or not the listener should only be notified once
      */
-    public function addListener (listener:IEventListener,?priority:Int=0,?once:Bool=false) :Void this.listeners.push({ listener: listener, priority: priority, once: once });
+    public function addListener (listener:IEventListener<T>,?priority:Int=0,?once:Bool=false) :Void this.listeners.push({ listener: listener, priority: priority, once: once });
     
     /**
      * Removes the specified listener from the list.
      * @param listener the event listener to remove
      */
-    public function removeListener (listener:IEventListener) :Void for (lis in this.listeners) { if (Reflect.compareMethods(lis.listener,listener)) this.listeners.remove(lis); return; }
+    public function removeListener (listener:IEventListener<T>) :Void for (lis in this.listeners) { if (Reflect.compareMethods(lis.listener,listener)) this.listeners.remove(lis); return; }
     
     /**
      * Clears all listeners from the list.
