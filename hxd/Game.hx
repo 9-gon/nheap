@@ -113,7 +113,7 @@ class Game extends hxd.App
     /**
      * If `index` is a valid index, returns the `Pad` at that given index. If not, returns null.
      */
-    public function getPad (index:Int) :Null<Pad> return (0<index&&index<this.pads.length) ? this.pads[index] : null;
+    public function getPad (index:Int) :Null<Pad> return (0<=index&&index<this.pads.length) ? this.pads[index] : null;
 
     /**
      * Returns all `Pad`s currently connected to the Game.
